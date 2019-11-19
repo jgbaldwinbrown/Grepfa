@@ -45,6 +45,6 @@ You will get this output:
 
 
 ## Output format
-The output is tab-separated, with the following columns
+The output is tab-separated, with the following columns:
 
 Sequence name | Start | End | Full match sequence | First capture group start | First capture group end | First capture group sequence | ...
