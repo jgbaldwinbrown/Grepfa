@@ -66,3 +66,26 @@ The following will identify the length, content, and location of all gaps in a g
 ```
 grepfa '[Nn]+' in.fa
 ```
+
+### Identifying restriction cut sites
+
+To identify the following (HindIII) cut sites in a sequence:
+
+```
+A|A G C T T
+T T C G A|A
+```
+
+Use the following invocation:
+
+```
+grepfa 'aagctt|ttcgaa' in.fa
+```
+
+### Adding context around searches
+
+To add basepairs of context around any search matches, simply add matches for any character to the ends:
+
+```
+grepfa '{0,50}(aagctt|ttcgaa){0,50}' in.fa
+```
