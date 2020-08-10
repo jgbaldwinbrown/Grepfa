@@ -21,6 +21,13 @@ python3 grepfa.py SEARCH_REGEX QUERY_STRING
 `grepfa` will do a perl-compatible regular expression search for all instances of SEARCH_REGEX in QUERY_STRING.
 Here are some examples of usage:
 
+## Output format
+The output is tab-separated, with the following columns:
+
+Sequence name | Start | End | Full match sequence | First capture group start | First capture group end | First capture group sequence | ...
+
+## Examples
+
 ### Identifying stop sites in a gene sequence
 ```
 grepfa '[Aa][Tt][Gg]' in.fa
@@ -43,8 +50,19 @@ You will get this output:
 >two	125	128	atg
 ```
 
+### Counting the lengths of all chromosomes
 
-## Output format
-The output is tab-separated, with the following columns:
+The following will count the lengths of all chromosomes, and will produce a valid `.bed` file containing
+all of the bases contained in all chromosomes:
 
-Sequence name | Start | End | Full match sequence | First capture group start | First capture group end | First capture group sequence | ...
+```
+grepfa '.+' in.fa | cut -d '	' -f 1,2,3
+```
+
+### Identifying gaps in a genome assembly
+
+The following will identify the length, content, and location of all gaps in a genome assembly:
+
+```
+grepfa '[Nn]+' in.fa
+```
