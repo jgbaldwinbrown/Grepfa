@@ -4,8 +4,7 @@ import re
 import sys
 
 def regexit(regex, header, seq):
-    matches = regex.finditer(header)
-    if matches:
+    if regex.search(header):
         print(header)
         print(seq)
 
