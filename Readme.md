@@ -89,3 +89,36 @@ To add basepairs of context around any search matches, simply add matches for an
 ```
 grepfa '{0,50}(aagctt|ttcgaa){0,50}' in.fa
 ```
+
+## Other included tools
+
+### Grepfah
+
+`grepfah` works just like `grepfa`, but performs its searches on headers instead of sequences.
+
+### Sedfa
+
+`sedfa` takes three or four arguments as follows:
+
+```
+sedfa HEADER_REGEX SEQUENCE_REGEX REPLACE_STRING [INPUT_FILE]
+```
+
+If `INPUT_FILE` is excluded, `stdin` is used for input. For each sequence that matches `HEADER_REGEX`, `SEQUENCE_REGEX` will be replaced
+with `REPLACE_STRING`. `REPLACE_STRING` can include capture groups using the format `\[0-9]+` to specify the capture group.
+
+#### Removing adapters from the beginning of sequence reads:
+
+Assuming the adapter sequence in question is `aggtctcc`, the following will remove adapters from the beginning of all reads in a .fasta file:
+
+```
+sedfa '.*' '.*aggtctcc' '' in.fa
+```
+
+#### Simulated mutations
+
+The following will simulate a deletion in a uniquely specified sequence:
+
+```
+sedfa '.*' 'atagccgggcta' 'atagcgggcta' in.fa
+```
